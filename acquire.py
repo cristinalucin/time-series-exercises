@@ -40,9 +40,15 @@ def wrangle_store_data():
     return df
 
 
-def get_opsd_data():
-    if os.path.exists('opsd.csv'):
-        return pd.read_csv('opsd.csv')
-    df = pd.read_csv('https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv')
-    df.to_csv('opsd.csv', index=False)
+def get_power_data():
+    '''This function acquires OPSD data from a github url and saves it for further use'''
+    filename = 'power_systems.csv'
+    if os.path.isfile(filename):
+        return pd.read_csv(filename).iloc[:,1:]
+    else:
+        url = 'https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv'
+        df = pd.read_csv(url)
+        df = pd.DataFrame(df)
+        df.to_csv(filename)
+        
     return df
