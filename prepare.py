@@ -25,9 +25,8 @@ def prepare_sales(df):
     
     return df
 
+#Prep power data
 def prepare_ops(df):
-    '''This function prepares OPS data by utilizing datetime as index, adding columns,
-    and imputing zeroes for missing data'''
     # Reassign the date column to be a datetime type
     df.Date = pd.to_datetime(df.Date)
     # Set the index as that date and then sort index (by the date)
